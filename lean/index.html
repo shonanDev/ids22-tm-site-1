@@ -12,7 +12,7 @@
 
     // the link to your model provided by Teachable Machine export panel
     const URL = "https://teachablemachine.withgoogle.com/models/MkZFCtWfX/";
-    let model, webcam, ctx, maxPredictions;
+    let model, webcam, ctx, maxPredictions, labelContainer;
 
     async function init() {
         const modelURL = URL + "model.json";
@@ -36,6 +36,8 @@
         const canvas = document.getElementById("canvas");
         canvas.width = size; canvas.height = size;
         ctx = canvas.getContext("2d");
+        labelContainer = document.getElementById("label-container");
+        labelContainer.appendChild(document.createElement("div"));
     }
 
     async function loop(timestamp) {
@@ -59,6 +61,7 @@
             }
             //toLog = toLog + prediction[i].className + ": " + prediction[i].probability.toFixed(2) + "   ";
         }
+        labelContainer.childNodes[0].innerHTML = toLog;
         console.log(toLog);
 
         // finally draw the poses
