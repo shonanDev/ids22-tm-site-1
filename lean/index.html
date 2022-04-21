@@ -1,9 +1,11 @@
 <!--https://teachablemachine.withgoogle.com/models/MkZFCtWfX/-->
 
 <div>Teachable Machine Pose Model</div>
-<button type="button" onclick="init()">Start</button>
-<div><canvas id="canvas"></canvas></div>
-<div id="label-container"></div>
+<!-- <button type="button" onclick="init()">Start</button> -->
+<body onload="loadPage()">
+    <div><canvas id="canvas" style="margin:auto; border-color: black; border-width: 5px;"></canvas></div>
+    <div id="label-container"></div>
+</body>
 <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@1.3.1/dist/tf.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/@teachablemachine/pose@0.8/dist/teachablemachine-pose.min.js"></script>
 <script type="text/javascript">
@@ -78,5 +80,10 @@
                 tmPose.drawSkeleton(pose.keypoints, minPartConfidence, ctx);
             }
         }
+    }
+
+    function loadPage()
+    {
+        init();
     }
 </script>
