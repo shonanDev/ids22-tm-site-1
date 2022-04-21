@@ -47,7 +47,7 @@
     async function loop(timestamp) {
         webcam.update(); // update the webcam frame
         await predict();
-        //game();
+        await game();
         window.requestAnimationFrame(loop);
     }
 
@@ -90,47 +90,48 @@
         init();
     }
 
-    const isAlive = true;
-    const angle = 0;
-    const fallCoeff = 0.01
-    const gameTime = 0;
-    const gameCanvas = document.getElementById("gameCanvas");
-    const gctx = gameCanvas.getContext('2d');
-    function game()
+    var angle = 0;
+    var fallCoeff = 0.01
+    var gameTime = -300;
+    var gameCanvas = document.getElementById("gameCanvas");
+    var gctx = gameCanvas.getContext('2d');
+    async function game()
     {
-        gctx.clearRect(0, 0, canvas.width, canvas.height);
-        if(isAlive == true)
+        gctx.clearRect(0, 0, gameCanvas.width, gameCanvas.height);
+        if(gameTime>0)
         {
             // Update elements
-            angle += (angle*fallCoeff);
+            //angle += (angle*fallCoeff);
+            angle += 1;
             if(angle==0)
             {
                 angle = -0.1;
             }
-            if(angle>400 || angle<0)
+            if(angle>200 || angle<-200)
             {
-                isAlive = false;
+                reset();
             }
             gameTime += 1;
 
+            gctx.strokeStyle = '#ff0000';
             gctx.beginPath();
-            gctx.moveTo(angle,300);
-            gctx.lineTo(angle,100);
+            gctx.moveTo(angle+200,300);
+            gctx.lineTo(angle+200,100);
             gctx.stroke();
         }
         else
         {
-            //gctx.font = '36px serif';
             gctx.fillText('Game Over', 10, 10);
             gctx.fillText('Score: ' + String(gameTime), 10, 50);
             gctx.fillText('Press any key to retry', 10, 90);
-            input.addEventListener('keydown', logKey);
+            gameTime += 1;
         }
     }
 
-    function logKey(e) {
-        isAlive = true;
-        gameTime = 0;
+    function reset()
+    {
         angle = 0;
+        gameTime = -300;
     }
+
 </script>
