@@ -38,6 +38,7 @@ body {
     float: left;
     font-size: 12px;
     margin-bottom: 5px;
+    display: block;
 }
 
 .model-btn {
@@ -78,12 +79,16 @@ nav a:hover {
     color: #ff4c4c;
 }
 
-.side-content {
+.side {
     width: 200px;
     float: left;
+    margin-left: 20px;
+}
+
+.side-content {
     background: #fff;
     padding: 20px;
-    margin-left: 10px;
+    margin-bottom: 20px;
 }
 
 main {
@@ -123,4 +128,14 @@ main {
     width: 90px;
     padding: 5px;
     float: left;
+}
+
+.languages {
+    font-size: 12px;
+    margin-top: 30px;
+    margin-left: 30px;
+}
+
+li {
+    margin-bottom: 5px;
 }
