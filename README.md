@@ -1,2 +1,3 @@
 # ids22-tm-site-1
 website created using google teachable machine
+redtorch.github.io/ids22-tm-site-1/website/index.html
