@@ -92,14 +92,37 @@
     }
 
     var angle = 200;
-    var fallCoeff = 0.01
+    var moveSpeed = 2;
     var gameTime = -150;
     var ballX = 200;
     var ballY = 200;
-    var ballAngle = 20;
-    var ballSpeed = 10;
+    var ballSpeed = 5;
+    var ballMoveX = 2;
+    var ballMoveY = 5;
     var gameCanvas = document.getElementById("gameCanvas");
     var gctx = gameCanvas.getContext('2d');
+
+    function ballBehavior()
+    {
+        ballX += ballMoveX;
+        ballY += ballMoveY;
+        if(ballX <= 10 || ballX >= 390)
+        {
+            ballMoveX = -(ballMoveX);
+        }
+        if((ballY <= 20 || ballY >= 380))
+        {
+            if(ballX<angle+20 && ballX>angle-20)
+            {
+                ballMoveY = -(ballMoveY);
+            }
+            else if(ballY <= 10 || ballY >= 390)
+            {
+                reset();
+            }
+        }
+    }
+
     async function game()
     {
         gctx.clearRect(0, 0, gameCanvas.width, gameCanvas.height);
@@ -107,29 +130,38 @@
         {
             if(toLog=="Left")
             {
-                angle -= 1;
+                angle -= moveSpeed;
+                if(angle<20)
+                {
+                    angle = 20;
+                }
             }
             else if(toLog=="Right")
             {
-                angle += 1;
+                angle += moveSpeed;
+                if(angle>380)
+                {
+                    angle = 380;
+                }
             }
-            if(angle>400 || angle<0)
-            {
-                reset();
-            }
+
+            ballBehavior();
+
             gameTime += 1;
 
-            gctx.strokeStyle = '#ff0000';
-            gctx.fillStyle = '#ff0000';
+            //gctx.strokeStyle = '#ff0000';
+            gctx.fillStyle = '#000000';
             gctx.fillRect(angle-20,380,40,10);
             gctx.fillRect(angle-20,10,40,10);
-            console.log("angle: " + String(angle));
+            gctx.fillStyle = "#ff0000";
+            gctx.fillRect(ballX-10,ballY-10,20,20);
+            // console.log("angle: " + String(angle));
         }
         else
         {
-            gctx.strokeStyle = '#000000';
+            gctx.fillStyle = '#000000';
             gctx.fillText('Game Over', 10, 30);
-            gctx.fillText('Score: ' + String(gameTime), 10, 70);
+            gctx.fillText('Time: ' + String(gameTime), 10, 70);
             gameTime += 1;
         }
     }
@@ -138,6 +170,11 @@
     {
         angle = 200;
         gameTime = -150;
+        ballX = 200;
+        ballY = 200;
+        ballSpeed = 5;
+        ballMoveX = 2;
+        ballMoveY = 5;
     }
 
 </script>
