@@ -99,6 +99,7 @@
     var ballSpeed = 5;
     var ballMoveX = 2;
     var ballMoveY = 5;
+    var paddleRadius = 40;
     var gameCanvas = document.getElementById("gameCanvas");
     var gctx = gameCanvas.getContext('2d');
 
@@ -112,7 +113,7 @@
         }
         if((ballY <= 20 || ballY >= 380))
         {
-            if(ballX<angle+20 && ballX>angle-20)
+            if(ballX<angle+paddleRadius && ballX>angle-paddleRadius)
             {
                 ballMoveY = -(ballMoveY);
             }
@@ -131,17 +132,17 @@
             if(toLog=="Left")
             {
                 angle -= moveSpeed;
-                if(angle<20)
+                if(angle<paddleRadius)
                 {
-                    angle = 20;
+                    angle = paddleRadius;
                 }
             }
             else if(toLog=="Right")
             {
                 angle += moveSpeed;
-                if(angle>380)
+                if(angle>400-paddleRadius)
                 {
-                    angle = 380;
+                    angle = 400-paddleRadius;
                 }
             }
 
@@ -151,8 +152,8 @@
 
             //gctx.strokeStyle = '#ff0000';
             gctx.fillStyle = '#000000';
-            gctx.fillRect(angle-20,380,40,10);
-            gctx.fillRect(angle-20,10,40,10);
+            gctx.fillRect(angle-paddleRadius,380,paddleRadius*2,10);
+            gctx.fillRect(angle-paddleRadius,10,paddleRadius*2,10);
             gctx.fillStyle = "#ff0000";
             gctx.fillRect(ballX-10,ballY-10,20,20);
             // console.log("angle: " + String(angle));
